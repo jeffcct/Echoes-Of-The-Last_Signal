@@ -1,0 +1,10 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* prevents scrollbars */
+  background: black; /* keeps background solid */
+}
+
+canvas {
+  display: block; /* removes inline padding around canvas */
+}
