@@ -1,6 +1,7 @@
 let player;
 let room;
 let oxygenSystem;
+let tanks = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -11,7 +12,15 @@ function setup() {
   // Create a player at the center of the room
   player = new Player(room.x + room.w / 2, room.y + room.h / 2, 40, 3);
   oxygenSystem = new OxygenSystem(100); // max oxygen = 100
+
+  let margin = 30; // this is also an error, why is margin = 30 a fixed number? what if the oxygen tank changes size, then wouldn't the margin change? will it be the same for every room?
+  for (let i = 0; i < 5; i++) {
+    let x = random(room.x + margin, room.x + room.w - margin);
+    let y = random(room.y + margin, room.y + room.h - margin);
+    tanks.push(new OxygenTank(x, y));
+  }
 }
+
 
 function draw() {
   background(20);
@@ -26,6 +35,11 @@ function draw() {
   // deplete oxygen slowly
   oxygenSystem.deplete(0.05);
   oxygenSystem.display();
+
+  for (let tank of tanks) {
+    tank.display();
+    tank.checkCollision(player, oxygenSystem);
+  }
 
   // check for game over
   console.log()
