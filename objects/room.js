@@ -6,10 +6,20 @@ class Room {
     this.h = h;
   }
 
-  display() {
+  draw() {
     noFill();
     stroke(200);
     strokeWeight(3);
     rect(this.x, this.y, this.w, this.h);
   }
+
+  getCollisionShape() {
+        return {
+            type: "rect",
+            x: this.x,
+            y: this.y,
+            w: this.w,
+            h: this.h
+        };
+    }
 }
